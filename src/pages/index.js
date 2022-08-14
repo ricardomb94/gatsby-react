@@ -1,6 +1,6 @@
 
 import React from "react"
-import {Link} from "gatsby"
+import {Link, graphql} from "gatsby"
 import Layout from "../components/Layout/Layout"
 // import styled from "styled-components"
 
@@ -19,12 +19,31 @@ import Layout from "../components/Layout/Layout"
 //     }
 //     `
 
-export default function Index(){
+export default function Index({data}){
+    const{
+        site:{
+            siteMetadata:{name, role, bio}
+        },
+    } = data;
     return (
         <Layout>
-            <h1>My Landing Page</h1>
-            <p>This is my landing page.</p>
-            <Link to="/about">About me</Link>
+            <div>
+                <h1>{name}</h1>
+                <p>{role}</p>
+                <p>{bio}</p>
+                <Link to="/about">About me</Link>
+            </div>
         </Layout>
     )
 }
+export const query = graphql`
+    {
+        site{
+            siteMetadata{
+                name
+                role
+                bio
+            }
+        }    
+    }
+`;
