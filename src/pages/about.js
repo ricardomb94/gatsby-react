@@ -1,12 +1,26 @@
-import React from 'react'
+import React from "react";
+import { graphql } from "gatsby";
+import Layout from "../components/Layout/Layout";
 
-const About = () => {
+export default function About({ data }) {
+  const {
+    markdownRemark: { html },
+  } = data;
   return (
-    <div>
-        <h1>My About Page</h1>
-        <p>This is a sentence about me.</p>
-    </div>
-  )
+    <Layout>
+      <div className="max-w-5xl mx-auto py-16 lg:py-24
+        text-center">
+        <div dangerouslySetInnerHTML={{ __html: html
+          }}></div>
+      </div>
+    </Layout>
+  );
 }
-
-export default About
+export const query = graphql`
+  {
+    markdownRemark(frontmatter: { type: { eq: "bio" }
+ }) {
+      html
+    }
+  }
+`;

@@ -7,7 +7,7 @@ import Layout from "../components/Layout/Layout"
 export default function Index({data}){
     const{
         site:{
-            siteMetadata:{name, role}
+             siteMetadata:{name, role}
         },
     } = data;
     return (
